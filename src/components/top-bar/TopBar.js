@@ -2,7 +2,8 @@ import AppBar from '@mui/material/AppBar';
 import { Link } from 'react-router-dom';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-
+import { Login } from '@mui/icons-material';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 
 export default function TopBar() {
   return (
@@ -20,8 +21,16 @@ export default function TopBar() {
           </Button>
         </div>
         <div>
-          <Button variant="outlined" className="text-white ml-2" component={Link} to="/register">Register</Button>
-          <Button variant="outlined" className="text-white ml-2" component={Link} to="/login">Login</Button>
+          <Button variant="outlined" className="text-white ml-2" component={Link} to="/register"
+            startIcon={<PersonAddAltIcon />}
+          >
+            Register
+          </Button>
+          <Button variant="outlined" className="text-white ml-2" component={Link} to="/login"
+            startIcon={<Login />}
+          > 
+          Login
+          </Button>
         </div>
       </div>
     </div>

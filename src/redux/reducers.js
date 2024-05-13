@@ -1,7 +1,5 @@
-// src/reducers/index.js
 import { combineReducers } from 'redux';
 
-// Example of a simple reducer
 const userReducer = (state = {}, action) => {
   switch (action.type) {
     case 'USER_FETCH_SUCCEEDED':

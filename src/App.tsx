@@ -1,25 +1,9 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import TopBar from './components/top-bar/TopBar';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
 import HomePage from './components/home-page/HomePage';
-
-function TopBar() {
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <Button color="inherit" component={Link} to="/register">Register</Button>
-        <Button color="inherit" component={Link} to="/login">Login</Button>
-        <Button color="inherit" component={Link} to="/">Home</Button>
-
-      </Toolbar>
-    </AppBar>
-  );
-}
-
 
 
 export default function App() {

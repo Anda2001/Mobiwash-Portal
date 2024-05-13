@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { blue, blueGrey } from '@mui/material/colors';
+
 
 const defaultTheme = createTheme();
 
@@ -37,7 +39,7 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: blue[400]}}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

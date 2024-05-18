@@ -27,7 +27,8 @@
     "redux-saga": "^1.3.0",
     "tailwindcss": "latest",
     "typescript": "latest",
-    "web-vitals": "latest"
+    "web-vitals": "latest",
+    "store": "^2.0.12"
   },
   "scripts": {
     "start": "react-scripts start",

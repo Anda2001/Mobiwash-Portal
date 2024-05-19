@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import bookingReducer from './booking/reducers';
+
 
 const userReducer = (state = {}, action) => {
   switch (action.type) {
@@ -12,7 +14,8 @@ const userReducer = (state = {}, action) => {
 };
 
 const rootReducer = combineReducers({
-  user: userReducer
+  user: userReducer,
+  booking: bookingReducer,
 });
 
 export default rootReducer;

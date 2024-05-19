@@ -1,9 +1,8 @@
-import {notification} from 'antd'
 import axios from 'axios'
 import store from 'store'
 
 const apiClient = axios.create({
-    baseURL: process.env.REACT_APP_TPADMIN_SERVICE_URL || window.config.gatewayApi,
+    baseURL: process.env.REACT_APP_TPADMIN_SERVICE_URL || 'http://localhost:3000',
     // timeout: 1000,
   })
 

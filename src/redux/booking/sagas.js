@@ -1,6 +1,5 @@
-import { all, takeEvery } from 'redux-saga/effects'
-import { notification } from 'antd'
-import * as bookingService from 'services/bookingsApi'
+import { all, takeEvery, put } from 'redux-saga/effects'
+import bookingsApi from './../../services/bookingsApi'
 
 import actions from './actions'
 
@@ -12,8 +11,9 @@ export function* GET_BOOKINGS({ payload }) {
         },
     })
     const { params } = payload
-    const response = yield bookingService.getBookings(params)
-    if (response && response.data) {
+    const response = yield bookingsApi.getBookings(params)
+    console.log("response", response)
+    if (response && response.status === 'success') {
         yield put({
             type: 'booking/SET_STATE',
             payload: {
@@ -32,6 +32,6 @@ export function* GET_BOOKINGS({ payload }) {
 export default function* rootSaga() {
     yield all([
         // Booking sagas
-        takeEvery(actions.GET_BOOKINGS, getBookings),
+        takeEvery(actions.GET_BOOKINGS, GET_BOOKINGS),
     ])
   }

@@ -1,5 +1,6 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
+import booking from './booking/sagas';
 
 function* fetchUser(action) {
   try {
@@ -11,10 +12,15 @@ function* fetchUser(action) {
   }
 }
 
-function* rootSaga() {
+function* watchFetchUser() {
   yield takeEvery('USER_FETCH_REQUESTED', fetchUser);
-  console.log('fetchUser cats', action);
+}
 
+function* rootSaga() {
+  yield all([
+    watchFetchUser(),
+    booking()
+  ]);
 }
 
 export default rootSaga;

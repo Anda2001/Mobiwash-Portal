@@ -3,15 +3,14 @@ import bookingsApi from './../../services/bookingsApi'
 
 import actions from './actions'
 
-export function* GET_BOOKINGS({ payload }) {
+export function* GET_BOOKINGS() {
     yield put({
         type: 'booking/SET_STATE',
         payload: {
             loading: true,
         },
     })
-    const { params } = payload
-    const response = yield bookingsApi.getBookings(params)
+    const response = yield bookingsApi.getBookings()
     console.log("response", response)
     if (response && response.status === 'success') {
         yield put({

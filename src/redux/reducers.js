@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
+import { combineReducers, applyMiddleware } from 'redux';
 import bookingReducer from './booking/reducers';
+import userReducer from './auth/reducers';
 
-
-const userReducer = (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case 'USER_FETCH_SUCCEEDED':
       return { ...state, ...action.payload };
@@ -14,6 +14,7 @@ const userReducer = (state = {}, action) => {
 };
 
 const rootReducer = combineReducers({
+  reducer: reducer,
   user: userReducer,
   booking: bookingReducer,
 });

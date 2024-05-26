@@ -17,7 +17,7 @@ import { blue, blueGrey } from '@mui/material/colors';
 
 const defaultTheme = createTheme();
 
-export default function Login() {
+export default function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

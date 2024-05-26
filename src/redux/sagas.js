@@ -1,6 +1,8 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 import booking from './booking/sagas';
+import user from './auth/sagas';
+
 
 function* fetchUser(action) {
   try {
@@ -19,7 +21,8 @@ function* watchFetchUser() {
 function* rootSaga() {
   yield all([
     watchFetchUser(),
-    booking()
+    booking(),
+    user()
   ]);
 }
 

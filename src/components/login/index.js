@@ -13,18 +13,23 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blue, blueGrey } from '@mui/material/colors';
+import { useDispatch } from 'react-redux';
+import actions from '../../redux/auth/actions';
 
 
 const defaultTheme = createTheme();
 
-export default function Register() {
+export default function Login() {
+  const dispatch = useDispatch();
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    dispatch({
+      type: actions.LOGIN,
+      payload: {
+        email: event.target.email.value,
+        password: event.target.password.value,
+      },
+    })
   };
 
   return (

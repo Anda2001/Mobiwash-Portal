@@ -1,7 +1,6 @@
 import { all, takeEvery, put } from 'redux-saga/effects'
 import userApi from './../../services/userApi'
 import actions from './actions'
-import { redirect } from 'react-router-dom'
 
 function* LOGIN({ payload }) {
     yield put({
@@ -19,9 +18,8 @@ function* LOGIN({ payload }) {
                     user: response.data,
                 },
             })
-            //take token from local storage
+            alert("USER LOGGED IN SUCCESSFULLY")
             localStorage.setItem('token', response.data.token)
-            //redirect to home page
             window.location.href = '/bookings'
         }
     } catch (error) {
@@ -42,23 +40,9 @@ export function* REGISTER({ payload }) {
             loading: true,
         },
     })
-    console.log("payload", payload)
     const response = yield userApi.register(payload)
-    console.log("response", response)
     if (response && response.status === 'success') {
-        console.log("USER REGISTERED SUCCESSFULLY")
-        // yield put({
-        //     type: 'users/SET_STATE',
-        //     payload: {
-        //         user: response?.data?.token || "AAAAAAA",
-        //     },
-        // })
-        // //redirect to home page
-        // yield call(history.push, {
-        //     pathname: `/` || '',
-        //     state: history.location && history.location.state,
-        //   })
-
+        window.location.href = '/login'
     }
     else {
         console.log('error', response)

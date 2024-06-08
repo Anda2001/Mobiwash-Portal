@@ -6,21 +6,24 @@ import Register from './components/register';
 import HomePage from './components/home-page/HomePage';
 import { useSelector } from 'react-redux';
 import Bookings from './components/bookings';
-
+import CustomDrawer from './components/drawer';
 
 export default function App() {
+  const user = useSelector(state => state.user)
+
   return (
-    <Router>
-      <TopBar />
-      <Routes>
-        <Route element={<PrivateRoutes />} >
-          <Route path="/bookings" element={<Bookings />} />
-        </Route>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </Router>
+      <Router>
+          <TopBar />  
+          <CustomDrawer />
+            <Routes>
+              <Route element={<PrivateRoutes />} >
+                <Route path="/bookings" element={<Bookings />} />
+              </Route>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+      </Router>
   );
 }
 

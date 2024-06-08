@@ -11,7 +11,7 @@ export function* GET_BOOKINGS() {
         },
     })
     const response = yield bookingsApi.getBookings()
-    console.log("response", response)
+    console.log("BOOKING response", response)
     if (response && response.status === 'success') {
         yield put({
             type: 'booking/SET_STATE',

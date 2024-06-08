@@ -15,12 +15,15 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blue, blueGrey } from '@mui/material/colors';
 import { useDispatch } from 'react-redux';
 import actions from '../../redux/auth/actions';
-
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
 export default function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch({
@@ -101,14 +104,14 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Button variant="text" startIcon={<HelpOutlineIcon color="error" />} onClick={() => window.location.href = "/forgotpassword"}>
                     Forgot password?
-                  </Link>
+                  </Button>
                 </Grid>
                 <Grid item>
-                  <Link to="/login" variant="body2">
+                  <Button variant="text" onClick={() => navigate('/register')}>
                     {"Don't have an account? Sign Up"}
-                  </Link>
+                  </Button>
                 </Grid>
               </Grid>
             </Box>

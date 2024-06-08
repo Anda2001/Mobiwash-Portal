@@ -9,7 +9,16 @@ const userApi = {
                 console.error(error)
                 return error
             })
-    }  
+    },
+    register(payload){
+        return apiClient
+            .post('/customers/register', { ...payload })
+            .then(response => response.data)
+            .catch(error => {
+                console.error(error)
+                return error
+            })
+    }      
 }
 
 export default userApi

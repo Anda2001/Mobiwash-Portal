@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Button, Grid, Box, Typography, Avatar } from '@mui/material';
+import { AppBar, Toolbar, Button, Grid, Box, Typography, Avatar,  Menu, MenuItem, ListItemIcon } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
-// import { useSelector } from 'react-redux';
+import CalendarMonthTwoToneIcon from '@mui/icons-material/CalendarMonthTwoTone';
+import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 
-
 export default function TopBar() {
-  // Assuming you get the user's name from somewhere
-  const userName = "John Doe";
   const dispatch = useDispatch();
+
   const userDetails = useSelector((state) => state.user.userDetails);
-  console.log("userDetails", userDetails)
+
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     dispatch({ type: 'user/ME', payload: { params: {} }})
@@ -21,16 +22,21 @@ export default function TopBar() {
     console.log("userDetails", userDetails)
   }, [userDetails]);
 
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <AppBar position="static" style={{ backgroundColor: '#333' }}>
       <Toolbar>
         <Grid container direction="column">
           <Grid item style={{ backgroundColor: '#444', padding: '8px 0' }}>
             <Grid container alignItems="center" justifyContent="right" spacing={2}>
-              
               <Grid item>
-                <Avatar {...stringAvatar(userDetails?.fullName  || 'John Doe')} />
+                <Avatar {...stringAvatar(userDetails?.fullName || 'John Doe')} />
               </Grid>
               <Grid item>
                 <Typography variant="h6" style={{ color: 'white' }}>
@@ -54,7 +60,7 @@ export default function TopBar() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item style={{ marginTop: '4px' }}>
+          <Grid item style={{ marginTop: '8px', marginBottom: '8px' }}>
             <Box sx={{ flexGrow: 1, pl: 2 }}>
               <Grid container spacing={2}>
                 <Grid item>
@@ -87,7 +93,7 @@ export default function TopBar() {
                     to="/bookings"
                     style={{ borderColor: 'white', color: 'white' }}
                   >
-                    Bookings
+                    Booking
                   </Button>
                 </Grid>
                 <Grid item>
@@ -95,11 +101,40 @@ export default function TopBar() {
                     variant="outlined"
                     className="text-white"
                     component={Link}
-                    to="/settings"
+                    onClick={handleMenuClick}
                     style={{ borderColor: 'white', color: 'white' }}
                   >
                     Settings
                   </Button>
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={handleMenuClose}
+                    style={{width: '500px'}}
+                  >
+                    <MenuItem component={Link} to="/bookings/upcoming" onClick={handleMenuClose} >
+                      <ListItemIcon>
+                        <CalendarMonthTwoToneIcon fontSize="small" />
+                      </ListItemIcon>
+                      <Typography variant="inherit">All bookings</Typography>
+                    </MenuItem>
+                    <MenuItem component={Link} to="/bookings/past" onClick={handleMenuClose}> 
+                      <ListItemIcon>
+                        <DescriptionOutlinedIcon fontSize="small" />
+                      </ListItemIcon>
+                      <Typography variant="inherit">                          
+                        Body Repair Bookings
+                      </Typography>                  
+                    </MenuItem>
+                    <MenuItem component={Link} to="/bookings/cancelled" onClick={handleMenuClose}>
+                      <ListItemIcon>
+                        <NoteAltOutlinedIcon fontSize="small" />
+                      </ListItemIcon>
+                      <Typography variant="inherit">                          
+                        Mechanics Bookings
+                      </Typography>                             
+                    </MenuItem>
+                  </Menu>
                 </Grid>
               </Grid>
             </Box>

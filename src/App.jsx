@@ -6,33 +6,36 @@ import Register from './components/register';
 import HomePage from './components/home-page/HomePage';
 import { useSelector } from 'react-redux';
 import Bookings from './components/bookings';
-import CustomDrawer from './components/drawer';
+import Dashboard from './components/dashboard';
 
 export default function App() {
   const user = useSelector(state => state.user)
 
   return (
       <Router>
-          <TopBar />  
-          <CustomDrawer />
             <Routes>
               <Route element={<PrivateRoutes />} >
                 <Route path="/bookings" element={<Bookings />} />
+                <Route path="/dashboard" element={<Dashboard />} />
               </Route>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="*" element={<Navigate to="/login" replace />} /> {/* Catch-all route */}
             </Routes>
       </Router>
   );
 }
 
 const PrivateRoutes = () => {
-  //take token from local storage
-  const token =localStorage.getItem('token')
+  const token = localStorage.getItem('token');
 
-  return (
-    token ? <Outlet /> : <Navigate to="/login" />
-  )
- 
-}
+  return token ? (
+    <>
+      <TopBar />
+      <Outlet />
+    </>
+  ) : (
+    <Navigate to="/login" replace />
+  );
+};

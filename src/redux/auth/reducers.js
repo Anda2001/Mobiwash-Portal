@@ -2,6 +2,7 @@ import actions from './actions';
 
 const initialState = {
     user: {},
+    userDetails: {},
     loading: false,
 };
 

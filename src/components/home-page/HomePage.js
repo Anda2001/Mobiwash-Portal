@@ -8,7 +8,11 @@ import actions from '../../redux/booking/actions';
 export default function HomePage() {
   const dispatch = useDispatch();
   // Use useSelector to get data from the Redux store
-  const user = useSelector((state) => state.user);
+  // const user = useSelector((state) => state.user);
+  const user = useSelector((state) => {
+    console.log("state", state)
+    return state.user
+  });
   const bookings = useSelector((state) => state.booking.bookings);
   const loading = useSelector((state) => state.booking.loading);
 

@@ -18,7 +18,19 @@ const userApi = {
                 console.error(error)
                 return error
             })
-    }      
+    },
+    getMe(){    
+        return apiClient
+        .get('/users/me', { 
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+         }})
+        .then(response => response.data)
+        .catch(error => {
+            console.error(error)
+            return error
+        })  
+    }
 }
 
 export default userApi

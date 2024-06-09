@@ -20,6 +20,7 @@ function* LOGIN({ payload }) {
             })
             alert("USER LOGGED IN SUCCESSFULLY")
             localStorage.setItem('token', response.data.token)
+            localStorage.setItem('user', JSON.stringify(response.data))
             window.location.href = '/bookings'
         }
     } catch (error) {
@@ -56,10 +57,38 @@ export function* REGISTER({ payload }) {
 }
 
 
+export function* ME({ payload }) {
+    yield put({
+        type: 'user/SET_STATE',
+        payload: {
+            loading: true,
+        },
+    })
+    const response = yield userApi.getMe(payload)
+    if (response && response.status === 'success') {
+        yield put({
+            type: actions.SET_STATE,
+            payload: {
+                userDetails: response.data,
+            },
+        })}
+    else {
+        console.log('error', response)
+    }
+    yield put({
+        type: 'user/SET_STATE',
+        payload: {
+            loading: false,
+        },
+    })
+}
+
+
 export default function* rootSaga() {
     yield all([
         // User sagas
         takeEvery(actions.LOGIN, LOGIN),
         takeEvery(actions.REGISTER, REGISTER),
+        takeEvery(actions.ME, ME),
     ])
   }

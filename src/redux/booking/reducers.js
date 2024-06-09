@@ -3,6 +3,7 @@ import actions from './actions';
 const initialState = {
     bookings: [],
     loading: false,
+    countBookings: {}
 };
 
 export default function bookingReducer(state = initialState, action) {

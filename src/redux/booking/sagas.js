@@ -28,6 +28,31 @@ export function* GET_BOOKINGS() {
     })
 }
 
+export function* GET_EMPLOYEES_BOOKINGS() {
+    yield put({
+        type: 'booking/SET_STATE',
+        payload: {
+            loading: true,
+        },
+    })
+    const response = yield bookingsApi.getEmployeesBookings()
+    console.log("BOOKING response", response)
+    if (response && response.status === 'success') {
+        yield put({
+            type: 'booking/SET_STATE',
+            payload: {
+                employeesBookings: response.data,
+            },
+        })
+    }
+    yield put({
+        type: 'booking/SET_STATE',
+        payload: {
+            loading: false,
+        },
+    })
+}
+
 export function* GET_COUNT_BOOKINGS() {
     yield put({
         type: 'booking/SET_STATE',
@@ -59,5 +84,6 @@ export default function* rootSaga() {
         // Booking sagas
         takeEvery(actions.GET_BOOKINGS, GET_BOOKINGS),
         takeEvery(actions.GET_COUNT_BOOKINGS, GET_COUNT_BOOKINGS),
+        takeEvery(actions.GET_EMPLOYEES_BOOKINGS, GET_EMPLOYEES_BOOKINGS),
     ])
   }

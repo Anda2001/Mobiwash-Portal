@@ -73,7 +73,7 @@ export default function Dashboard() {
               onChange={(e) => setFilters({ ...filters, bookingStatus: e.target.value })}
               fullWidth
             >
-              <option value="">Select</option>
+              <option value=""></option>
               {/* Add booking status options here */}
             </TextField>
           </Grid>
@@ -86,7 +86,7 @@ export default function Dashboard() {
               onChange={(e) => setFilters({ ...filters, partsStatus: e.target.value })}
               fullWidth
             >
-              <option value="">Select</option>
+              <option value=""></option>
               {/* Add parts status options here */}
             </TextField>
           </Grid>

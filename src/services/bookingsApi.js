@@ -15,6 +15,18 @@ const bookingsApi = {
                 return error
             })
     },
+    getEmployeesBookings(){
+        return apiClient
+            .get('/employees/calendar', { 
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+             }})
+            .then(response => response.data)
+            .catch(error => {
+                console.error(error)
+                return error
+            })
+    },
     getCountBookings(){
         return apiClient
             .get('/count/bookings', {

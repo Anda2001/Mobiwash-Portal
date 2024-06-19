@@ -63,6 +63,7 @@ export default function Dashboard() {
         <Typography variant="h5" gutterBottom>
           Bookings
         </Typography>
+        <hr />
         <Grid container spacing={2} style={{ marginBottom: '10px' }}>
           <Grid item xs={12} sm={6} md={2}>
             <TextField

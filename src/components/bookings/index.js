@@ -31,10 +31,9 @@ export default function Dashboard() {
   const columns = [
     { field: 'registration', headerName: 'Registration', width: 150 },
     { field: 'status', headerName: 'Booking Status', width: 150 },
-    { field: 'partsStatus', headerName: 'Parts Status', width: 150 },
     { field: 'startTime', headerName: 'Booking Date', width: 180 },
     { field: 'duration', headerName: 'Repair Duration', width: 150 },
-    { field: 'revenue', headerName: 'Revenue (Ex Parts)', width: 180 },
+    { field: 'revenue', headerName: 'Revenue', width: 180 },
     { field: 'postCode', headerName: 'Postcode', width: 120 },
     { field: 'clientName', headerName: 'Client Name', width: 180 },
     { field: 'providerName', headerName: 'Provider Name', width: 180 },
@@ -44,17 +43,16 @@ export default function Dashboard() {
 
   const rows = bookings.map((booking) => ({
     id: booking.id,
-    registration: booking.vehicle.registration,
+    registration: booking.registration,
     status: booking.status,
-    partsStatus: 'Not Available',
     startTime: new Date(booking.startTime).toLocaleDateString(),
     duration: booking.duration,
-    revenue: booking.payments.reduce((sum, payment) => sum + payment.amount, 0),
-    postCode: booking.customer.customerMeta.postCode,
+    revenue: 0, //booking.payments.reduce((sum, payment) => sum + payment.amount, 0),
+    postCode: booking.postcode,
     clientName: booking.client.name,
-    providerName: booking.serviceProvider.fullName,
-    customerName: booking.customer.fullName,
-    customerContactNumber: booking.customer.phone,
+    providerName: booking.providerName,
+    customerName: booking.customerName,
+    customerContactNumber: booking.customerContactNumber,
   }));
 
   return (
@@ -80,38 +78,9 @@ export default function Dashboard() {
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <TextField
-              label="Parts Status"
-              select
-              SelectProps={{ native: true }}
-              value={filters.partsStatus}
-              onChange={(e) => setFilters({ ...filters, partsStatus: e.target.value })}
-              fullWidth
-            >
-              <option value=""></option>
-              {/* Add parts status options here */}
-            </TextField>
-          </Grid>
-          <Grid item xs={12} sm={6} md={2}>
-            <TextField
-              label="Postcode"
-              value={filters.postcode}
-              onChange={(e) => setFilters({ ...filters, postcode: e.target.value })}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={2}>
-            <TextField
               label="Client"
               value={filters.client}
               onChange={(e) => setFilters({ ...filters, client: e.target.value })}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={2}>
-            <TextField
-              label="Repair Duration"
-              value={filters.duration}
-              onChange={(e) => setFilters({ ...filters, duration: e.target.value })}
               fullWidth
             />
           </Grid>

@@ -5,7 +5,7 @@ import apiClient from './axios'
 const bookingsApi = {
     getBookings(){
         return apiClient
-            .get('/bookings', { 
+            .get('/bookings/manage', { 
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
              }})
